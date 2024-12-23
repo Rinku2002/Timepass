@@ -1,16 +1,5 @@
 import os
 
-input_sudoko = [
-    ["6","","","3","","1","","8","4"],
-    ["","","","","6","9","","","7"],
-    ["","","","","","7","","1","3"],
-    ["4","","","6","9","","","","8"],
-    ["","","","","1","5","","",""],
-    ["","","8","","","","","6",""],
-    ["","","","","","","","",""],
-    ["","","","1","","","7","",""],
-    ["2","","4","","","3","1","",""],
-]
 sudoko_numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 def clear_screen():
@@ -108,6 +97,7 @@ def solve_sudoko(possible_array, sudoko):
                 sudoko[r][c] = get_num_if_exist(possible_array_cell)
                 continue
             
+            # If a number in possibilities array is unique among row, col and box, then that is answer
             sol = solve_possible_array(possible_array[r], possible_array[r][c])
             if sol:
                 sudoko[r][c] = sol
@@ -123,6 +113,14 @@ def solve_sudoko(possible_array, sudoko):
                 sudoko[r][c] = sol
                 continue
             # exit()
+
+def get_input():
+    sudoko = []
+    for i in range(9):
+        sudoko.append(["" if c == " " else c for c in input()])
+    return sudoko
+
+input_sudoko = get_input()
 
 possible_array = create_initial_possible_array()
 clear_screen()
